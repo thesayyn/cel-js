@@ -3,7 +3,7 @@ import CELLexer from './gen/CELLexer';
 import CELParser from './gen/CELParser';
 import CELVisitor from './gen/CELVisitor';
 
-export function parse(input) {
+export function parse(input: string) {
     const chars = new antlr4.InputStream(input);
     const lexer = new CELLexer(chars);
     const tokens = new antlr4.CommonTokenStream(lexer);
@@ -12,11 +12,27 @@ export function parse(input) {
     parser.start().accept(new Visitor());
 }
 
+
+
 class Visitor extends CELVisitor {
-    visitStart(ctx) {
-        console.dir(ctx);
+
+    visit(ctx: antlr4.ParserRuleContext) {
+        switch (ctx.constructor) {
+            case CELParser.StartContext:
+                return this.visitStart(ctx);
+            case CELParser.ExprContext:
+                return this.visitExpr(ctx);
+        }
     }
+
+    visitStart(ctx) {
+        return this.visit(ctx.expr());
+    }
+
     visitExpr(ctx) {
+        console.log(ctx.op);
+        const result = this.visit(ctx.e);
+
         throw new Error('Method not implemented.');
     }
     visitConditionalOr(ctx) {

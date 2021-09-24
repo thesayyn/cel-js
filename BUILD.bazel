@@ -1,0 +1,12 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "ts_project", "js_library")
+
+js_library(
+    name = "javascript",
+    srcs =  glob(["src/**/*.js"])
+)
+
+ts_project(
+    name = "src",
+    srcs = glob(["src/**/*.ts"]),
+    deps = [":javascript"],
+)

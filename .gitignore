@@ -1,2 +1,7 @@
 node_modules
-operators.js
+.antlr
+src/parser/gen/*
+src/parser/expr/*
+!src/parser/gen/CEL.g4
+bin/expr/*
+!bin/expr/tsconfig.json
