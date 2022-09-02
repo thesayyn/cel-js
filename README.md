@@ -1,4 +1,4 @@
-# Common Expression Language Javascript implementation
+# CEL Javascript implementation
 
 This is a work in progress CEL (common expression language) implementation in Javascript.
 
